@@ -18,29 +18,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BillItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+  @ManyToOne
+  @JoinColumn(name = "category_id")
+  private Category category;
 
-    @Column(name = "description")
-    private String description;
+  @Column(name = "description")
+  private String description;
 
-    @Column(name = "code")
-    private String code;
+  @Column(name = "code")
+  private String code;
 
-    @Column(name = "qty")
-    private Integer qty;
+  @Column(name = "qty")
+  private Integer qty;
 
-    @Column(name = "price")
-    private Float price;
+  @Column(name = "price")
+  private Float price;
 
-    @Column(name = "tax")
-    private Float tax;
+  @Column(name = "tax")
+  private Float tax;
 
-    @Column(name = "total")
-    private float total;
+  @Column(name = "total")
+  private float total;
 }

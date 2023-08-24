@@ -1,7 +1,15 @@
 package br.ematos.chatgpt.FinancControl.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
+
 import br.ematos.chatgpt.FinancControl.entity.IncomeEntity;
 import br.ematos.chatgpt.FinancControl.repository.IncomeRepository;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,22 +18,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
-
 public class IncomeServiceTest {
 
-  @Mock
-  private IncomeRepository incomeRepository;
+  @Mock private IncomeRepository incomeRepository;
 
-  @InjectMocks
-  private IncomeService incomeService;
+  @InjectMocks private IncomeService incomeService;
 
   @BeforeEach
   void setUp() {
@@ -110,12 +107,14 @@ public class IncomeServiceTest {
 
   @Test
   public void testUpdateIncome() {
-    IncomeEntity income = new IncomeEntity(1, new Date(), "John Doe", "Monthly salary", 5000L, true);
+    IncomeEntity income =
+        new IncomeEntity(1, new Date(), "John Doe", "Monthly salary", 5000L, true);
 
     when(incomeRepository.findById(1)).thenReturn(Optional.of(income));
     when(incomeRepository.save(ArgumentMatchers.any(IncomeEntity.class))).thenReturn(income);
 
-    IncomeEntity updatedIncome = new IncomeEntity(1, new Date(), "Jane Doe", "Updated salary", 5500L, false);
+    IncomeEntity updatedIncome =
+        new IncomeEntity(1, new Date(), "Jane Doe", "Updated salary", 5500L, false);
 
     incomeService.updateIncome(1, updatedIncome);
 
@@ -129,11 +128,14 @@ public class IncomeServiceTest {
   public void testUpdateIncomeEntityNotFound() {
     when(incomeRepository.findById(1)).thenReturn(Optional.empty());
 
-    IncomeEntity updatedIncome = new IncomeEntity(1, new Date(), "Jane Doe", "Updated salary", 5500L, false);
+    IncomeEntity updatedIncome =
+        new IncomeEntity(1, new Date(), "Jane Doe", "Updated salary", 5500L, false);
 
-    Assertions.assertThrows(EntityNotFoundException.class, () -> {
-      incomeService.updateIncome(1, updatedIncome);
-    });
+    Assertions.assertThrows(
+        EntityNotFoundException.class,
+        () -> {
+          incomeService.updateIncome(1, updatedIncome);
+        });
   }
 
   @Test

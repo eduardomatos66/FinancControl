@@ -1,6 +1,5 @@
 package br.ematos.chatgpt.FinancControl.spring;
 
-
 import br.ematos.chatgpt.FinancControl.repository.BillItemRepository;
 import br.ematos.chatgpt.FinancControl.repository.BillRepository;
 import br.ematos.chatgpt.FinancControl.repository.CategoryRepository;
@@ -19,38 +18,39 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringConfig {
 
-    @Bean
-    public BillService billService(BillRepository billRepository,
-                       VendorService vendorService,
-                       TagService tagService,
-                       BillItemService billItemService) {
+  @Bean
+  public BillService billService(
+      BillRepository billRepository,
+      VendorService vendorService,
+      TagService tagService,
+      BillItemService billItemService) {
 
-        return new BillService(billRepository, vendorService, tagService, billItemService);
-    }
+    return new BillService(billRepository, vendorService, tagService, billItemService);
+  }
 
-    @Bean
-    public BillItemService billItemService(BillItemRepository billItemRepository,
-                                           CategoryService categoryService) {
-        return new BillItemService(billItemRepository, categoryService);
-    }
+  @Bean
+  public BillItemService billItemService(
+      BillItemRepository billItemRepository, CategoryService categoryService) {
+    return new BillItemService(billItemRepository, categoryService);
+  }
 
-    @Bean
-    public CategoryService categoryService(CategoryRepository categoryRepository) {
-        return new CategoryService(categoryRepository);
-    }
+  @Bean
+  public CategoryService categoryService(CategoryRepository categoryRepository) {
+    return new CategoryService(categoryRepository);
+  }
 
-    @Bean
-    public IncomeService incomeService(IncomeRepository incomeRepository) {
-        return new IncomeService(incomeRepository);
-    }
+  @Bean
+  public IncomeService incomeService(IncomeRepository incomeRepository) {
+    return new IncomeService(incomeRepository);
+  }
 
-    @Bean
-    public TagService tagService(TagRepository tagRepository) {
-        return new TagService(tagRepository);
-    }
+  @Bean
+  public TagService tagService(TagRepository tagRepository) {
+    return new TagService(tagRepository);
+  }
 
-    @Bean
-    public VendorService vendorService(VendorRepository vendorRepository) {
-        return new VendorService(vendorRepository);
-    }
+  @Bean
+  public VendorService vendorService(VendorRepository vendorRepository) {
+    return new VendorService(vendorRepository);
+  }
 }

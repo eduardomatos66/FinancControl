@@ -2,6 +2,7 @@ package br.ematos.chatgpt.FinancControl.controller;
 
 import br.ematos.chatgpt.FinancControl.entity.Vendor;
 import br.ematos.chatgpt.FinancControl.service.VendorService;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,37 +12,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/vendors")
 public class VendorController {
 
-    private final VendorService vendorService;
-    @GetMapping
-    public List<Vendor> getAllVendors() {
-        return vendorService.findAllVendors();
-    }
+  private final VendorService vendorService;
 
-    @GetMapping("/by-name/{name}")
-    public List<Vendor> getVendorsByName(@PathVariable String name) {
-        return vendorService.findVendorsByName(name);
-    }
+  @GetMapping
+  public List<Vendor> getAllVendors() {
+    return vendorService.findAllVendors();
+  }
 
-    @GetMapping("/with-logo")
-    public List<Vendor> getVendorsWithLogo() {
-        return vendorService.findVendorsWithLogo();
-    }
+  @GetMapping("/by-name/{name}")
+  public List<Vendor> getVendorsByName(@PathVariable String name) {
+    return vendorService.findVendorsByName(name);
+  }
 
-    @GetMapping("/without-logo")
-    public List<Vendor> getVendorsWithoutLogo() {
-        return vendorService.findVendorsWithoutLogo();
-    }
+  @GetMapping("/with-logo")
+  public List<Vendor> getVendorsWithLogo() {
+    return vendorService.findVendorsWithLogo();
+  }
 
-    @PostMapping
-    public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
-        Vendor createdVendor = vendorService.createVendor(vendor);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdVendor);
-    }
+  @GetMapping("/without-logo")
+  public List<Vendor> getVendorsWithoutLogo() {
+    return vendorService.findVendorsWithoutLogo();
+  }
+
+  @PostMapping
+  public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
+    Vendor createdVendor = vendorService.createVendor(vendor);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdVendor);
+  }
 }
