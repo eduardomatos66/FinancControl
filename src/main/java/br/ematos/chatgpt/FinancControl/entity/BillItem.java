@@ -6,8 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,4 +45,8 @@ public class BillItem {
 
   @Column(name = "total")
   private float total;
+
+  @ManyToMany
+  @JoinColumn(name = "internal_item_info")
+  private List<InternalItemInfo> internalItemInfoList;
 }

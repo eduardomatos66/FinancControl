@@ -94,7 +94,23 @@
 			<version>2.27.2</version>
 			<scope>test</scope>
 		</dependency>
+
+
+		<!-- bill reader -->
+		<dependency>
+			<groupId>net.sourceforge.tess4j</groupId>
+			<artifactId>tess4j</artifactId>
+			<version>5.8.0</version>
+		</dependency>
+
+		<!-- OpenCV -->
+		<dependency>
+			<groupId>org.openpnp</groupId>
+			<artifactId>opencv</artifactId>
+			<version>4.7.0-0</version>
+		</dependency>
 	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
