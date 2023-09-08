@@ -1,13 +1,16 @@
 package br.ematos.chatgpt.financcontrol.service;
 
 import br.ematos.chatgpt.financcontrol.entity.IncomeEntity;
+import br.ematos.chatgpt.financcontrol.exception.EntityNotFoundException;
 import br.ematos.chatgpt.financcontrol.repository.IncomeRepository;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
+@Slf4j
 public class IncomeService extends AbstractService<IncomeEntity> {
 
   private final IncomeRepository incomeRepository;
@@ -38,7 +41,9 @@ public class IncomeService extends AbstractService<IncomeEntity> {
   }
 
   public IncomeEntity createIncome(IncomeEntity income) {
-    return incomeRepository.save(income);
+    return incomeRepository.findById(income.getId()).stream()
+        .findFirst()
+        .orElseGet(() -> incomeRepository.save(income));
   }
 
   public IncomeEntity updateIncome(Integer id, IncomeEntity updatedIncome) {
@@ -57,7 +62,14 @@ public class IncomeService extends AbstractService<IncomeEntity> {
   }
 
   public boolean deleteIncome(Integer id) {
-    incomeRepository.deleteById(id);
-    return true;
+    return incomeRepository
+        .findById(id)
+        .map(
+            income -> {
+              incomeRepository.delete(income);
+              log.info("Income deleted successfully: " + income);
+              return true;
+            })
+        .orElse(false);
   }
 }

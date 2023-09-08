@@ -19,7 +19,8 @@ class UnitConverterServiceTest {
 
     Map<Unit, UnitInfo> mockUnitInfoMap = mock(Map.class);
     when(mockUnitInfoMap.containsKey(Unit.valueOfUnitName(unit.toLowerCase()))).thenReturn(true);
-    when(mockUnitInfoMap.get(Unit.valueOfUnitName(unit.toLowerCase()))).thenReturn(new UnitInfo(Unit.KG, 0.45359237));
+    when(mockUnitInfoMap.get(Unit.valueOfUnitName(unit.toLowerCase())))
+        .thenReturn(new UnitInfo(Unit.KG, 0.45359237));
 
     double result = unitConverterService.convertToBaseUnit(value, unit);
 
@@ -69,7 +70,8 @@ class UnitConverterServiceTest {
     // Mock the unitInfoMap
     Map<Unit, UnitInfo> mockUnitInfoMap = mock(Map.class);
     when(mockUnitInfoMap.containsKey(Unit.valueOfUnitName(unit.toLowerCase()))).thenReturn(true);
-    when(mockUnitInfoMap.get(Unit.valueOfUnitName(unit.toLowerCase()))).thenReturn(new UnitInfo(Unit.KG, 0.45359237));
+    when(mockUnitInfoMap.get(Unit.valueOfUnitName(unit.toLowerCase())))
+        .thenReturn(new UnitInfo(Unit.KG, 0.45359237));
 
     // Act
     String result = unitConverterService.convertAndPrint(itemPriceInCAD, itemValue, unit);
@@ -81,21 +83,23 @@ class UnitConverterServiceTest {
 
   @ParameterizedTest
   @CsvSource({
-          "lb, 10.0, 1.0, '22.046 CAD/KG'",
-          "oz, 10.0, 1.0, '338.14 CAD/L'",
-          "g, 10.0, 1.0, '10000.0 CAD/KG'",
-          "ml, 10.0, 1.0, '10000.0 CAD/L'",
-          "cm, 10.0, 1.0, '1000.0 CAD/M'",
-          "mm, 10.0, 1.0, '10000.0 CAD/M'"
+    "lb, 10.0, 1.0, '22.046 CAD/KG'",
+    "oz, 10.0, 1.0, '338.14 CAD/L'",
+    "g, 10.0, 1.0, '10000.0 CAD/KG'",
+    "ml, 10.0, 1.0, '10000.0 CAD/L'",
+    "cm, 10.0, 1.0, '1000.0 CAD/M'",
+    "mm, 10.0, 1.0, '10000.0 CAD/M'"
   })
-  void testConvertAndPrintWithUnitInfoMapEntries(String unit, double itemPriceInCAD, double itemValue, String expectedOutput) {
+  void testConvertAndPrintWithUnitInfoMapEntries(
+      String unit, double itemPriceInCAD, double itemValue, String expectedOutput) {
     // Arrange
     UnitConverterService unitConverterService = new UnitConverterService();
 
     // Mock the unitInfoMap
     Map<Unit, UnitInfo> mockUnitInfoMap = mock(Map.class);
     when(mockUnitInfoMap.containsKey(Unit.valueOfUnitName(unit.toLowerCase()))).thenReturn(true);
-    when(mockUnitInfoMap.get(Unit.valueOfUnitName(unit.toLowerCase()))).thenReturn(new UnitInfo(Unit.KG, 0.45359237));
+    when(mockUnitInfoMap.get(Unit.valueOfUnitName(unit.toLowerCase())))
+        .thenReturn(new UnitInfo(Unit.KG, 0.45359237));
 
     // Act
     String result = unitConverterService.convertAndPrint(itemPriceInCAD, itemValue, unit);
@@ -103,5 +107,4 @@ class UnitConverterServiceTest {
     // Assert
     assertEquals(expectedOutput, result);
   }
-
 }

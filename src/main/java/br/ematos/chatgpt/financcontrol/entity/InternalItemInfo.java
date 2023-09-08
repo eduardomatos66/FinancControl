@@ -44,5 +44,3 @@ public class InternalItemInfo {
   @Column(name = "unities")
   private int unities;
 }
-
-

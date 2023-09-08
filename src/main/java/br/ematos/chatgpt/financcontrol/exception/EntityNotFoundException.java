@@ -1,4 +1,4 @@
-package br.ematos.chatgpt.financcontrol.service;
+package br.ematos.chatgpt.financcontrol.exception;
 
 public class EntityNotFoundException extends RuntimeException {
 

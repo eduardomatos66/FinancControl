@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import br.ematos.chatgpt.financcontrol.entity.IncomeEntity;
+import br.ematos.chatgpt.financcontrol.exception.EntityNotFoundException;
 import br.ematos.chatgpt.financcontrol.repository.IncomeRepository;
 import java.util.Date;
 import java.util.List;

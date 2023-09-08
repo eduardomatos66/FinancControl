@@ -80,9 +80,7 @@ public class IncomeController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteIncome(@PathVariable Integer id) {
-    Optional<IncomeEntity> existingIncome = incomeService.findById(id);
-    if (existingIncome.isPresent()) {
-      incomeService.deleteIncome(id);
+    if (incomeService.deleteIncome(id)) {
       return ResponseEntity.noContent().build();
     } else {
       return ResponseEntity.notFound().build();

@@ -6,15 +6,12 @@ import br.ematos.chatgpt.financcontrol.entity.Tag;
 import br.ematos.chatgpt.financcontrol.entity.Vendor;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BillRepository extends JpaRepository<Bill, Integer> {
-  Optional<Bill> findById(Integer id);
-
+public interface BillRepository extends JpaRepository<Bill, Long> {
   List<Bill> findByDocumentDate(Date documentDate);
 
   List<Bill> findByVendor(Vendor vendor);
