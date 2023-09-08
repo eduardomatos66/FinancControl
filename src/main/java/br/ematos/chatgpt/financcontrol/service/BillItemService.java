@@ -18,58 +18,71 @@ public class BillItemService extends AbstractService<BillItem> {
 
   @Override
   public Optional<BillItem> findById(Integer id) {
+    log.info("Finding BillItem by ID: " + id);
     return Optional.of(billItemRepository.getReferenceById(id));
   }
 
   public List<BillItem> findAllBillItems() {
+    log.info("Finding all BillItems");
     return billItemRepository.findAll();
   }
 
   public List<BillItem> findBillItemsByCategory(Integer categoryId) {
+    log.info("Finding BillItems by Category ID: " + categoryId);
     Optional<Category> category = categoryService.findById(categoryId);
 
     return category.map(billItemRepository::findByCategory).orElse(null);
   }
 
   public List<BillItem> findBillItemsByDescription(String description) {
+    log.info("Finding BillItems by Description: " + description);
     return billItemRepository.findByDescription(description);
   }
 
   public List<BillItem> findBillItemsByCode(String code) {
+    log.info("Finding BillItems by Code: " + code);
     return billItemRepository.findByCode(code);
   }
 
   public List<BillItem> findBillItemsByQty(Integer qty) {
+    log.info("Finding BillItems by Quantity: " + qty);
     return billItemRepository.findByQty(qty);
   }
 
   public List<BillItem> findBillItemsByPrice(Float price) {
+    log.info("Finding BillItems by Price: " + price);
     return billItemRepository.findByPrice(price);
   }
 
   public List<BillItem> findBillItemsByTax(Float tax) {
+    log.info("Finding BillItems by Tax: " + tax);
     return billItemRepository.findByTax(tax);
   }
 
   public List<BillItem> findBillItemsByTotal(Float total) {
+    log.info("Finding BillItems by Total: " + total);
     return billItemRepository.findByTotal(total);
   }
 
   public List<BillItem> findBillItemsWithPriceGreaterThan(Float price) {
+    log.info("Finding BillItems with Price Greater Than: " + price);
     return billItemRepository.findByPriceGreaterThan(price);
   }
 
   public BillItem createBillItem(BillItem billItem) {
+    log.info("Creating a new BillItem: " + billItem);
     return billItemRepository.findById(billItem.getId()).stream()
         .findFirst()
         .orElseGet(() -> billItemRepository.save(billItem));
   }
 
   public List<BillItem> createBillItems(List<BillItem> billItems) {
+    log.info("Creating multiple BillItems");
     return billItems.stream().map(this::createBillItem).toList();
   }
 
   public boolean deleteBillItem(Integer id) {
+    log.info("Deleting BillItem with ID: " + id);
     return billItemRepository
         .findById(id)
         .map(
@@ -82,6 +95,7 @@ public class BillItemService extends AbstractService<BillItem> {
   }
 
   public BillItem updateBillItem(Integer id, BillItem updatedBillItem) {
+    log.info("Updating BillItem with ID: " + id);
     Optional<BillItem> optionalBillItem = billItemRepository.findById(id);
     if (optionalBillItem.isEmpty()) {
       throw new EntityNotFoundException("BillItem with id " + id + " not found");

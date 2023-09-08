@@ -23,66 +23,80 @@ public class BillService extends AbstractService<Bill> {
 
   @Override
   public Optional<Bill> findById(Integer id) {
+    log.info("Finding Bill by ID: " + id);
     return Optional.of(billRepository.getReferenceById(Long.valueOf(id)));
   }
 
   public List<Bill> findAllBills() {
+    log.info("Finding all Bills");
     return billRepository.findAll();
   }
 
   public List<Bill> findBillsByDocumentDate(Date documentDate) {
+    log.info("Finding Bills by Document Date: " + documentDate);
     return billRepository.findByDocumentDate(documentDate);
   }
 
   public List<Bill> findBillsByVendor(Integer vendorId) {
+    log.info("Finding Bills by Vendor ID: " + vendorId);
     Optional<Vendor> vendor = vendorService.findById(vendorId);
 
     return vendor.map(billRepository::findByVendor).orElse(null);
   }
 
   public List<Bill> findBillsByTag(Integer tagId) {
+    log.info("Finding Bills by Tag ID: " + tagId);
     Optional<Tag> tag = tagService.findById(tagId);
 
     return tag.map(billRepository::findByTagsContaining).orElse(null);
   }
 
   public List<Bill> findBillsByItem(Integer itemId) {
+    log.info("Finding Bills by Item ID: " + itemId);
     Optional<BillItem> billItem = billItemService.findById(itemId);
 
     return billItem.map(billRepository::findByItemsContaining).orElse(null);
   }
 
   public List<Bill> findBillsByTotal(Float total) {
+    log.info("Finding Bills by Total: " + total);
     return billRepository.findByTotal(total);
   }
 
   public List<Bill> findBillsByTax(Float tax) {
+    log.info("Finding Bills by Tax: " + tax);
     return billRepository.findByTax(tax);
   }
 
   public List<Bill> findBillsByCreatedDate(Date createdDate) {
+    log.info("Finding Bills by Created Date: " + createdDate);
     return billRepository.findByCreatedDate(createdDate);
   }
 
   public List<Bill> findBillsWithPicture() {
+    log.info("Finding Bills with Picture");
     return billRepository.findByBillPictureNotNull();
   }
 
   public List<Bill> findBillsWithoutPicture() {
+    log.info("Finding Bills without Picture");
     return billRepository.findByBillPictureIsNull();
   }
 
   public Bill createBill(Bill bill) {
+    log.info("Creating a new Bill: " + bill);
     return billRepository.findById(bill.getId()).stream()
         .findFirst()
         .orElseGet(() -> billRepository.save(bill));
   }
 
   public List<Bill> createBills(List<Bill> bills) {
+    log.info("Creating multiple Bills");
     return bills.stream().map(this::createBill).toList();
   }
 
   public boolean deleteBill(Integer id) {
+    log.info("Deleting Bill with ID: " + id);
     return billRepository
         .findById(Long.valueOf(id))
         .map(
@@ -95,6 +109,7 @@ public class BillService extends AbstractService<Bill> {
   }
 
   public Bill updateBill(Integer id, Bill updatedBill) {
+    log.info("Updating Bill with ID: " + id);
     Optional<Bill> optionalBill = billRepository.findById(Long.valueOf(id));
     if (optionalBill.isEmpty()) {
       throw new EntityNotFoundException("Bill with id " + id + " not found");
