@@ -46,6 +46,10 @@ public class IncomeService extends AbstractService<IncomeEntity> {
         .orElseGet(() -> incomeRepository.save(income));
   }
 
+  public List<IncomeEntity> createIncomes(List<IncomeEntity> incomes) {
+    return incomes.stream().map(this::createIncome).toList();
+  }
+
   public IncomeEntity updateIncome(Integer id, IncomeEntity updatedIncome) {
     Optional<IncomeEntity> optionalIncome = incomeRepository.findById(id);
     if (optionalIncome.isEmpty()) {

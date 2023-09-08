@@ -65,6 +65,10 @@ public class BillItemService extends AbstractService<BillItem> {
         .orElseGet(() -> billItemRepository.save(billItem));
   }
 
+  public List<BillItem> createBillItems(List<BillItem> billItems) {
+    return billItems.stream().map(this::createBillItem).toList();
+  }
+
   public boolean deleteBillItem(Integer id) {
     return billItemRepository
         .findById(id)

@@ -17,7 +17,7 @@ public class Bill {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "from_who")
+  @Column(name = "document_date")
   private Date documentDate;
 
   @ManyToOne

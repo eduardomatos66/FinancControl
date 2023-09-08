@@ -66,6 +66,13 @@ public class IncomeController {
     return ResponseEntity.status(HttpStatus.CREATED).body(createdIncome);
   }
 
+  @PostMapping("/create-multiple")
+  public ResponseEntity<List<IncomeEntity>> createIncomeEntities(
+      @RequestBody List<IncomeEntity> incomeEntities) {
+    List<IncomeEntity> createdIncomeEntities = incomeService.createIncomes(incomeEntities);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdIncomeEntities);
+  }
+
   @PutMapping("/{id}")
   public ResponseEntity<IncomeEntity> updateIncome(
       @PathVariable Integer id, @RequestBody IncomeEntity incomeEntity) {

@@ -37,6 +37,10 @@ public class CategoryService extends AbstractService<Category> {
         .orElseGet(() -> categoryRepository.save(category));
   }
 
+  public List<Category> createCategories(List<Category> categories) {
+    return categories.stream().map(this::createCategory).toList();
+  }
+
   public boolean deleteCategory(Integer id) {
     return categoryRepository
         .findById(id)

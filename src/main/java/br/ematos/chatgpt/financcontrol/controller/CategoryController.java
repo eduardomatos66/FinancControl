@@ -44,6 +44,12 @@ public class CategoryController {
     return ResponseEntity.status(HttpStatus.CREATED).body(createdCategory);
   }
 
+  @PostMapping("/create-multiple")
+  public ResponseEntity<List<Category>> createCategories(@RequestBody List<Category> categories) {
+    List<Category> createdCategories = categoryService.createCategories(categories);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdCategories);
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
     if (categoryService.deleteCategory(id)) {

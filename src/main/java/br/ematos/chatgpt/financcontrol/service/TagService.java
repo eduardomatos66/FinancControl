@@ -33,6 +33,10 @@ public class TagService extends AbstractService<Tag> {
         .orElseGet(() -> tagRepository.save(tag));
   }
 
+  public List<Tag> createTags(List<Tag> tags) {
+    return tags.stream().map(this::createTag).toList();
+  }
+
   public boolean deleteTag(Integer id) {
     return tagRepository
         .findById(id)

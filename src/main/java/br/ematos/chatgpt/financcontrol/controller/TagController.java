@@ -39,6 +39,12 @@ public class TagController {
     return ResponseEntity.status(HttpStatus.CREATED).body(createdTag);
   }
 
+  @PostMapping("/create-multiple")
+  public ResponseEntity<List<Tag>> createTags(@RequestBody List<Tag> tags) {
+    List<Tag> createdTags = tagService.createTags(tags);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdTags);
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteTag(@PathVariable Integer id) {
     if (tagService.deleteTag(id)) {

@@ -78,6 +78,10 @@ public class BillService extends AbstractService<Bill> {
         .orElseGet(() -> billRepository.save(bill));
   }
 
+  public List<Bill> createBills(List<Bill> bills) {
+    return bills.stream().map(this::createBill).toList();
+  }
+
   public boolean deleteBill(Integer id) {
     return billRepository
         .findById(Long.valueOf(id))

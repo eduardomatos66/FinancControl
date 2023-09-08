@@ -49,6 +49,12 @@ public class VendorController {
     return ResponseEntity.status(HttpStatus.CREATED).body(createdVendor);
   }
 
+  @PostMapping("/create-multiple")
+  public ResponseEntity<List<Vendor>> createVendors(@RequestBody List<Vendor> vendors) {
+    List<Vendor> createdVendors = vendorService.createVendors(vendors);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdVendors);
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteVendor(@PathVariable Integer id) {
     if (vendorService.deleteVendor(id)) {

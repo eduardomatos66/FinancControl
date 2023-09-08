@@ -85,6 +85,12 @@ public class BillController {
     return ResponseEntity.status(HttpStatus.CREATED).body(createdBill);
   }
 
+  @PostMapping("/create-multiple")
+  public ResponseEntity<List<Bill>> createBills(@RequestBody List<Bill> bills) {
+    List<Bill> createdBills = billService.createBills(bills);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdBills);
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteBill(@PathVariable Integer id) {
     if (billService.deleteBill(id)) {

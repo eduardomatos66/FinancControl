@@ -41,6 +41,10 @@ public class VendorService extends AbstractService<Vendor> {
         .orElseGet(() -> vendorRepository.save(vendor));
   }
 
+  public List<Vendor> createVendors(List<Vendor> vendors) {
+    return vendors.stream().map(this::createVendor).toList();
+  }
+
   public boolean deleteVendor(Integer id) {
     return vendorRepository
         .findById(id)
