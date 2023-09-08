@@ -20,7 +20,7 @@ public class InternalItemInfo {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(name = "gWeight")
+  @Column(name = "originalPrice")
   private double originalPrice;
 
   @Column(name = "gWeight")
