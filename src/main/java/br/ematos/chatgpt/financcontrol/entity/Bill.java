@@ -24,6 +24,9 @@ public class Bill {
   @JoinColumn(name = "vendor_id", nullable = false)
   private Vendor vendor;
 
+  @Column(name = "description")
+  private String description;
+
   @Column(name = "tags")
   @ManyToMany
   private List<Tag> tags;

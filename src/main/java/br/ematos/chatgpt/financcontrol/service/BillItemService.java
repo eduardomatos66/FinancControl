@@ -69,16 +69,16 @@ public class BillItemService extends AbstractService<BillItem> {
     return billItemRepository.findByPriceGreaterThan(price);
   }
 
-  public BillItem createBillItem(BillItem billItem) {
-    log.info("Creating a new BillItem: " + billItem);
+  public BillItem findOrCreateBillItem(BillItem billItem) {
+    log.info("Searching or creating a new BillItem: " + billItem);
     return billItemRepository.findById(billItem.getId()).stream()
         .findFirst()
         .orElseGet(() -> billItemRepository.save(billItem));
   }
 
-  public List<BillItem> createBillItems(List<BillItem> billItems) {
-    log.info("Creating multiple BillItems");
-    return billItems.stream().map(this::createBillItem).toList();
+  public List<BillItem> findOrCreateBillItemList(List<BillItem> billItems) {
+    log.info("Searching or creating multiple BillItems");
+    return billItems.stream().map(this::findOrCreateBillItem).toList();
   }
 
   public boolean deleteBillItem(Integer id) {

@@ -85,9 +85,33 @@ public class BillService extends AbstractService<Bill> {
 
   public Bill createBill(Bill bill) {
     log.info("Creating a new Bill: " + bill);
-    return billRepository.findById(bill.getId()).stream()
-        .findFirst()
-        .orElseGet(() -> billRepository.save(bill));
+
+    Vendor vendor = null;
+    if (bill.getVendor() != null) {
+      vendor = vendorService.findOrCreateVendor(bill.getVendor());
+    }
+
+    List<Tag> tags = null;
+    if (bill.getTags() != null) {
+      tags = tagService.findOrCreateTagList(bill.getTags());
+    }
+
+    List<BillItem> billItems = null;
+    if (bill.getItems() != null) {
+      billItems = billItemService.findOrCreateBillItemList(bill.getItems());
+    }
+
+    bill.setTags(tags);
+    bill.setItems(billItems);
+    bill.setVendor(vendor);
+
+    if (bill.getId() == null) {
+      return billRepository.save(bill);
+    } else {
+      return billRepository.findById(bill.getId()).stream()
+              .findFirst()
+              .orElseGet(() -> billRepository.save(bill));
+    }
   }
 
   public List<Bill> createBills(List<Bill> bills) {

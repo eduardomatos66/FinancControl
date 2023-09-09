@@ -3,6 +3,7 @@ package br.ematos.chatgpt.financcontrol.service;
 import br.ematos.chatgpt.financcontrol.entity.Tag;
 import br.ematos.chatgpt.financcontrol.exception.EntityNotFoundException;
 import br.ematos.chatgpt.financcontrol.repository.TagRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -65,5 +66,14 @@ public class TagService extends AbstractService<Tag> {
     Tag tag = optionalTag.get();
     tag.setName(updatedTag.getName());
     return tagRepository.save(tag);
+  }
+
+  public List<Tag> findOrCreateTagList(List<Tag> tags) {
+    List<Tag> result = new ArrayList<>();
+
+    for (Tag tag : tags) {
+      result.add(createTag(tag));
+    }
+    return result;
   }
 }

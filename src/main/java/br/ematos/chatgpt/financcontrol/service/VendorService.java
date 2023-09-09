@@ -77,4 +77,19 @@ public class VendorService extends AbstractService<Vendor> {
     vendor.setName(updatedVendor.getName());
     return vendorRepository.save(vendor);
   }
+
+  public Vendor findOrCreateVendor(Vendor vendor) {
+    Optional<Vendor> result = null;
+
+    if (vendor.getId() != null) {
+      result = findById(vendor.getId().intValue());
+    } else if (vendor.getName() != null) {
+      result = findVendorsByName(vendor.getName()).stream().findFirst();
+    }
+
+    if (result.isEmpty()) {
+      return createVendor(vendor);
+    }
+    return result.get();
+  }
 }

@@ -70,13 +70,13 @@ public class BillItemController {
 
   @PostMapping
   public ResponseEntity<BillItem> createBillItem(@RequestBody BillItem billItem) {
-    BillItem createdBillItem = billItemService.createBillItem(billItem);
+    BillItem createdBillItem = billItemService.findOrCreateBillItem(billItem);
     return ResponseEntity.status(HttpStatus.CREATED).body(createdBillItem);
   }
 
   @PostMapping("/create-multiple")
   public ResponseEntity<List<BillItem>> createBillItems(@RequestBody List<BillItem> billItems) {
-    List<BillItem> createdBillItems = billItemService.createBillItems(billItems);
+    List<BillItem> createdBillItems = billItemService.findOrCreateBillItemList(billItems);
     return ResponseEntity.status(HttpStatus.CREATED).body(createdBillItems);
   }
 
