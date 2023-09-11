@@ -54,8 +54,8 @@ public class UnitConverterService {
     Unit baseUnit = getBaseUnit(Unit.valueOfUnitName(unit));
 
     System.out.println("Item Price in CAD: " + itemPriceInCAD);
-    System.out.println("Item Value: " + itemValue + " " + unit);
-    System.out.println("Value in Base Unit: " + valueInBaseUnit + " " + baseUnit);
+    System.out.println("Item Weight: " + itemValue + " " + unit);
+    System.out.println("Item Weight in Base Unit: " + valueInBaseUnit + " " + baseUnit);
     System.out.println("Price per Base Unit: " + pricePerBaseUnit + " CAD/" + baseUnit);
 
     return pricePerBaseUnit + " CAD/" + baseUnit;

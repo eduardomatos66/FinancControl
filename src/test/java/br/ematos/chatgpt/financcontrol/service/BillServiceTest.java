@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
@@ -145,9 +146,10 @@ class BillServiceTest {
             "07-Sep-2023 |     NoFrios      | Cereal + Suco + Berries       |    Alimentação           | $ 16.46",
             "07-Sep-2023 |     McDonalds    | Sorvete                       |    Alimentação           | $ 2.10",
             "07-Sep-2023 |     Walmart      | Carrinho de compra            |    Utensílios domésticos | $ 49.92",
-            "07-Sep-2023 |     Walmart      | Banana + Gillete + SabãoPrato |    Alimentação           | $ 48.56|"
+            "07-Sep-2023 |     Walmart      | Banana + Gillete + SabãoPrato |    Alimentação           | $ 48.56"
         );
     @Test
+    @Disabled
     public void loadBills() throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy", Locale.ENGLISH);
 

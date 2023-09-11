@@ -7,7 +7,6 @@ import net.sourceforge.tess4j.Tesseract;
 public class BillReaderService {
 
   public static void main(String[] args) throws Exception {
-
     String resizedPath =
         ImageResizer.resizeImage(
             Objects.requireNonNull(
