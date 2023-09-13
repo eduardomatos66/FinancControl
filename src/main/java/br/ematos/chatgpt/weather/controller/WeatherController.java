@@ -3,9 +3,10 @@ package br.ematos.chatgpt.weather.controller;
 import br.ematos.chatgpt.weather.api.WeatherAPI;
 import br.ematos.chatgpt.weather.entity.Weather;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
@@ -13,15 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/weather")
 public class WeatherController {
 
-    private final WeatherAPI weatherAPI;
+  private final WeatherAPI weatherAPI;
 
-    @GetMapping
-    public Weather getWeather() {
-        return weatherAPI.retrieveWeatherInfo();
-    }
+  @GetMapping("/")
+  public ResponseEntity<Weather> getCurrentWeather() {
+    Weather currentWeather = weatherAPI.retrieveWeatherInfo();
+    return ResponseEntity.ok(currentWeather);
+  }
 
-    @GetMapping("/{latitude}/{longitude}")
-    public Weather getWeather(@PathVariable("latitude") double latitude, @PathVariable("longitude") double longitude) {
-        return weatherAPI.retrieveWeatherInfo(latitude, longitude);
-    }
+  @GetMapping("/forecast")
+  public ResponseEntity<Weather> getWeatherForecast(
+      @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude) {
+    Weather forecast = weatherAPI.retrieveWeatherInfo(latitude, longitude);
+    return ResponseEntity.ok(forecast);
+  }
 }

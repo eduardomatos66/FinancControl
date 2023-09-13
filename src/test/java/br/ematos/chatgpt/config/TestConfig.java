@@ -1,4 +1,4 @@
-package br.ematos.chatgpt.weather.spring;
+package br.ematos.chatgpt.config;
 
 import br.ematos.chatgpt.weather.api.WeatherAPI;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class WeatherSpringConfig {
+public class TestConfig {
 
   @Bean
   public WeatherAPI weatherAPI(

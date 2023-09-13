@@ -109,8 +109,8 @@ public class BillService extends AbstractService<Bill> {
       return billRepository.save(bill);
     } else {
       return billRepository.findById(bill.getId()).stream()
-              .findFirst()
-              .orElseGet(() -> billRepository.save(bill));
+          .findFirst()
+          .orElseGet(() -> billRepository.save(bill));
     }
   }
 
